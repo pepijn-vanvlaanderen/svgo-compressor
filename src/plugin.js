@@ -49,7 +49,13 @@ export function compress(context) {
                 sortAttrs: true,
               }
             }
-          }
+          },
+          {
+            name: 'prefixIds',
+            params: {
+              prefix: (node, info) => /[^/]*$/.exec(info.path.toLowerCase())[0].replace(/[. ]/g, '_'),
+            }
+          },
         ]
       }}
       const result = optimize(svgString, config)
